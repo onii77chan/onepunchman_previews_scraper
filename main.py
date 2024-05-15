@@ -7,8 +7,8 @@ from time import sleep
 
 
 def scrape_previews():
-    tom = 1
-    chapter = 1
+    tom = 8
+    chapter = 56
 
     driver = webdriver.Firefox()
     save_directory = r"C:\Users\ToTo\PycharmProjects\my_pjs\onepunchman_preview_scraper\scrape results"
@@ -35,18 +35,17 @@ def scrape_previews():
             print(f'Глава {chapter} тома {tom} не найдена, переход к следующей главе или тому...')
             chapter += 1
             try:
-                driver.get(f'https://readmanga.live/vanpanchmen/vol{tom}/{chapter}?mtr=true')
+                driver.get(url)
                 sleep(1.5)
                 driver.find_element(By.ID, "mangaPicture")
             except NoSuchElementException:
                 chapter -= 1
                 tom += 1
                 try:
-                    driver.get(f'https://readmanga.live/vanpanchmen/vol{tom}/{chapter}?mtr=true')
+                    driver.get(url)
                     sleep(1.5)
                     driver.find_element(By.ID, "mangaPicture")
                 except NoSuchElementException:
-
                     print("Достигнут последний том манги. Скрапинг завершен.")
                     break
 
